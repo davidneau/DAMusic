@@ -1,17 +1,7 @@
-const cacheName = 'pwa-cache-v1';
-const filesToCache = [
-  '/',
-  '/index.html',
-  '/votre-video.mp4',
-  '/styles.css',
-  '/script.js'
-];
-
-self.addEventListener('install', event => {
+self.addEventListener('notificationclick', (event) => {
+    event.notification.close();
     event.waitUntil(
-        caches.open(cacheName).then(cache => {
-        return cache.addAll(filesToCache);
-        })
+        clients.openWindow('/') // Rouvrir l'application si nécessaire
     );
 });
 
