@@ -198,7 +198,6 @@ export default ({
     position: fixed;
     left: 0;
     right: 0; 
-    top: 0;
     bottom: 0;
     width: 100%; 
     height: 100%;
@@ -225,7 +224,7 @@ export default ({
 }
 
 .playerMiniatureMobile{
-    top: calc(100% - 200px) !important;
+    bottom: 0 !important;
     left: 30% !important;
     width: 70% !important;
     height: 200px !important;
