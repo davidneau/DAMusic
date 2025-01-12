@@ -181,14 +181,13 @@ export default ({
 #player {
     display: none;
     position: fixed;
-    top: 100px;
-    bottom: 100px;
-    left: 100px;
-    right: 100px; 
-    width: calc(100% - 200px); 
-    height: calc(100% - 200px);
+    left: 0;
+    right: 0; 
+    top: 0;
+    bottom: 0;
     z-index: 3;
 }
+
 
 #blur{
     width: 100vw;
@@ -199,6 +198,18 @@ export default ({
     opacity: 0.5;
     filter: blur(100px);
     display: none;
+}
+
+@media screen and (min-width: 428px)  {
+    
+    #player {
+        top: 100px;
+        bottom: 100px;
+        left: 100px;
+        right: 100px; 
+        width: calc(100% - 200px); 
+        height: calc(100% - 200px);
+    }
 }
 </style>
   
