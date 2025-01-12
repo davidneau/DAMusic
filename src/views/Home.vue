@@ -18,6 +18,7 @@ export default ({
     },
     data() {
         return {
+            device: "Mobile",
             current_video_id: "",
             video_playing: false,
             API_KEY: 'AIzaSyA8apjRRfjCHmu6M_4q_r3kUbnO_qJ7xfk',
@@ -28,6 +29,9 @@ export default ({
     },
     methods: {
         init(){
+            let largeurEcran = window.innerWidth || document.documentElement.clientWidth;
+            if (largeurEcran > 428) this.device = "Desktop"
+
             document.getElementById("blur").onclick = () => {
                 if (this.video_playing) {
                     this.video_playing = false
@@ -109,6 +113,9 @@ export default ({
                         document.getElementsByTagName("body")[0].style.overflow = "hidden"
                         document.getElementById("player").style.display = "block"
                         document.getElementById("blur").style.display = "block"
+                        if (this.device == "Mobile") {
+                            document.getElementById("searchResult").style.overflow = "hidden"
+                        }
                     }
 
                     let img = document.createElement("img")
@@ -185,6 +192,8 @@ export default ({
     right: 0; 
     top: 0;
     bottom: 0;
+    width: 100%; 
+    height: 100%;
     z-index: 3;
 }
 
