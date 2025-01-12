@@ -5,7 +5,7 @@
         <button @click="search">Search</button>
     </div>
     <div id="searchResult"></div>
-    <YoutubePlayer ref="youtubePlayer" id="player"/>
+    <YoutubePlayer ref="youtubePlayer" id="player" @monEvenement="close"/>
 </template>
 
 <script>
@@ -33,11 +33,17 @@ export default ({
             if (largeurEcran > 428) this.device = "Desktop"
 
             document.getElementById("blur").onclick = () => {
-                if (this.video_playing) {
-                    this.video_playing = false
-                    document.getElementById("player").style.display = "none"
-                    document.getElementById("blur").style.display = "none"
-                }
+                this.close()
+            }
+        },
+        close(){
+            console.log(this.video_playing)
+            if (this.video_playing) {
+                this.video_playing = false
+                document.getElementById("blur").style.display = "none"
+                document.getElementsByTagName("body")[0].style.overflow = "visible"
+                if (this.device == "Desktop") document.getElementById("player").classList.add("playerMiniature")
+                else document.getElementById("player").classList.add("playerMiniatureMobile")
             }
         },
         async getRecommendedVideo() {
@@ -112,7 +118,10 @@ export default ({
                         this.$refs.youtubePlayer.playNewVideo(item.id);
                         document.getElementsByTagName("body")[0].style.overflow = "hidden"
                         document.getElementById("player").style.display = "block"
+                        document.getElementById("player").classList.remove("playerMiniature")
+                        document.getElementById("player").classList.remove("playerMiniatureMobile")
                         document.getElementById("blur").style.display = "block"
+                        document.getElementById("blur").style.height = document.getElementById("searchResult").clientHeight + "px"
                         if (this.device == "Mobile") {
                             document.getElementById("searchResult").style.overflow = "hidden"
                         }
@@ -133,7 +142,6 @@ export default ({
                     div.appendChild(divDesc)
 
                     document.getElementById("searchResult").appendChild(div)
-                    
                 });
             } catch (error) {
                 console.error('Erreur lors de la recherche YouTube :', error);
@@ -208,6 +216,21 @@ export default ({
     filter: blur(100px);
     display: none;
 }
+
+.playerMiniature{
+    top: calc(100% - 300px) !important;
+    left: calc(100% - 500px) !important;
+    width: 400px !important;
+    height: 200px !important;
+}
+
+.playerMiniatureMobile{
+    top: calc(100% - 200px) !important;
+    left: 30% !important;
+    width: 70% !important;
+    height: 200px !important;
+}
+
 
 @media screen and (min-width: 428px)  {
     

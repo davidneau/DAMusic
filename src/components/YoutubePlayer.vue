@@ -1,5 +1,6 @@
 <template>
   <div>
+    <button @click="$emit('monEvenement')" id="close">close</button>
     <div id="youtube-player"></div>
   </div>
 </template>
@@ -98,6 +99,19 @@ window.onYouTubeIframeAPIReady = function() {
 #youtube-player{
     width: 100%;
     height: 100%;
+}
+
+#close{
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+@media screen and (min-width: 428px)  {
+    
+  #close{
+    top: -30px;
+  }
 }
 
 </style>
